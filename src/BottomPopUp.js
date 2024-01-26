@@ -39,6 +39,73 @@ export class BottomPopUp extends React.Component {
       </TouchableWithoutFeedback>
     );
   }
+  renderTitle = () =>{
+      const {title} = this.props
+      return(
+
+        <View style ={{alignItems:"center"}}>
+              <Text //texto dentro del pop
+                 style={{
+                  color: "#182E44",
+                  fontSize: 25,
+                  fontWeight: "500",
+                  margin: 15,
+                  marginBottom:30,
+                }}
+              >
+                {title}
+              </Text>
+            </View>
+      )
+  }
+  renderContent = ( ) => {
+    const {data} = this.props
+    
+    return (
+        <View>
+          <FlatList 
+            style = {{marginBottom: 20}}
+                      showsVercticalScrollIndicator={false}
+                      data = {data}
+                      renderItem = {this.renderItem}
+                      extraData={data}
+                      keyExtractoe={(item, index) => index.toSting()}
+                      ItemSeparatorComponent={this.renderSeparator}
+                      contentContainerStyle={{
+                          paddingBottom: 40
+                      }} 
+           />
+        </View>
+    )
+  }
+  
+ 
+  renderItem = ({item}) => {
+    return(
+      <View style={{
+        height:50,
+        flex: 1,
+        alignItems:"flex-start",
+        justifyContent:"center",
+        marginLeft: 20,
+
+      }}>
+          <Text style={{fontSize:18, fontWeight: "normal", color:"#182E44",}}> {item.name} </Text>
+      </View>
+    )
+
+  }
+  renderSeparator = () => {
+   return(
+    <View style={{
+      opacity: 0.1,
+      backgroundColor: "#182E44",
+      height:1,
+    }}>
+    </View>
+    
+   )
+  }
   
 
   render() {
@@ -56,37 +123,28 @@ export class BottomPopUp extends React.Component {
          style={{
           flex: 1,
           backgroundColor: "#000000AA",
-          justifyContent: "center",
-          alignItems: "center", // Añadido para centrar horizontalmente
+          justifyContent: "flex-end", //center
+         // alignItems: "center", // Añadido para centrar horizontalmente
         }}
         >
           {this.renderOutsideTouchable(onTouchOutside)}
           
           
-          <View
+          <View // este es el diseño del pop
             style={{
               backgroundColor: "#FFFFFF",
-              width: "90%",
-              height: "20%",
-              borderBottomRightRadius: 10,
-              borderBottomLeftRadius: 10,
+              width: "100%",
+              //height: "20%",
+              borderTopRightRadius: 10,
+              borderTopftRadius: 10,
               paddingHorizontal: 10,
+              maxHeight: deviceHeight * 0.4,
             }}
-              
+            
           >
             
-            <View>
-              <Text
-                 style={{
-                  color: "#182E44",
-                  fontSize: 20,
-                  fontWeight: "500",
-                  margin: 15,
-                }}
-              >
-                {title}
-              </Text>
-            </View>
+            {this.renderTitle()}
+            {this.renderContent()}
 
            
           </View>

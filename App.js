@@ -10,6 +10,23 @@ import {
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import { BottomPopUp } from "./src/BottomPopUp";
 
+const popUplist =[
+    {
+      id:1,
+      name: "Task"
+    },
+    {
+      id:2,
+      name: "greenk"
+    },
+    {
+      id:3,
+      name: "Lee"
+    }
+]
+
+
+
 export default function App() {
   let popupRef = React.createRef();
 
@@ -32,6 +49,7 @@ export default function App() {
           title="Pop de Prueba "
           ref={(target) => (popupRef = target)}
           onTouchOutside={onClosePopup}
+          data={popUplist}
         />
       </SafeAreaView>
     </>

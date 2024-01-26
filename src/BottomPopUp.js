@@ -123,8 +123,8 @@ export class BottomPopUp extends React.Component {
          style={{
           flex: 1,
           backgroundColor: "#000000AA",
-          justifyContent: "flex-end", //center
-         // alignItems: "center", // Añadido para centrar horizontalmente
+          justifyContent: "flex-end",
+          //alignItems: "center", // Añadido para centrar horizontalmente
         }}
         >
           {this.renderOutsideTouchable(onTouchOutside)}
@@ -134,10 +134,11 @@ export class BottomPopUp extends React.Component {
             style={{
               backgroundColor: "#FFFFFF",
               width: "100%",
-              //height: "20%",
+             // height: "20%",
               borderTopRightRadius: 10,
-              borderTopftRadius: 10,
+              borderTopLeftRadius: 10,
               paddingHorizontal: 10,
+            
               maxHeight: deviceHeight * 0.4,
             }}
             

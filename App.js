@@ -38,40 +38,73 @@ export default function App() {
   };
 
   return (
-    <>
-      <StatusBar barStyle="dark-content" />
+    <View style={styles.contBox}>
+      <View style={styles.contElement}>
+        <Text style={styles.txtCont}>McDonald</Text>
+        <StatusBar barStyle="dark-content" />
+        <SafeAreaView style={styles.container}>
+          <TouchableWithoutFeedback onPress={onShowPopup}>
+            <FontAwesome5 name="bookmark" style={styles.Icono} />
+          </TouchableWithoutFeedback>
+          <BottomPopUp
+            title="Pop de Prueba "
+            ref={(target) => (popupRef = target)}
+            onTouchOutside={onClosePopup}
+            data={popUplist}
+          />
+        </SafeAreaView>
 
-      <SafeAreaView style={styles.container}>
-        <TouchableWithoutFeedback onPress={onShowPopup}>
-          <FontAwesome5 name="bookmark" style={styles.Icono} />
-        </TouchableWithoutFeedback>
-        <BottomPopUp
-          title="Pop de Prueba "
-          ref={(target) => (popupRef = target)}
-          onTouchOutside={onClosePopup}
-          data={popUplist}
-        />
-      </SafeAreaView>
-    </>
+        
+      </View>
+      <View style={styles.contElement}>
+      <Text style={styles.txtCont}>Burger King</Text>
+        <StatusBar barStyle="dark-content" />
+        <SafeAreaView style={styles.container}>
+          <TouchableWithoutFeedback onPress={onShowPopup}>
+            <FontAwesome5 name="bookmark" style={styles.Icono} />
+          </TouchableWithoutFeedback>
+          <BottomPopUp
+            title="Pop de Prueba"
+            ref={(target) => (popupRef = target)}
+            onTouchOutside={onClosePopup}
+            data={popUplist}
+          />
+        </SafeAreaView>
+
+        
+      </View>
+    </View>
+
+    
+    
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
+  contBox: {
     flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
+    padding: 24,
+    //backgroundColor: "#fff",
+    //alignItems: "center",
     justifyContent: "center",
+  },
+  contElement:{
+    padding: 10,
+    backgroundColor: '#eaeaea',
+    width: "100%",
+    height:"10%",
+    flexDirection: 'row',
+    justifyContent:"space-between",
+    alignItems: 'between',
+    marginBottom: 20,
   },
 
   Icono: {
-    fontSize: 30,
-    backgroundColor: "white",
-
-    position: "relative",
-    fontSize: 30,
-    fontFamily: "FontAwesome5Free-Regular",
-    fontWeight: "normal",
-    fontStyle: "normal",
+    fontSize: 40,
+    padding: 4,
+  },
+  txtCont: {
+    fontSize:30,
+    padding: 4,
   },
 });

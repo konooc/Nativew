@@ -6,6 +6,7 @@ import {
   View,
   Text,
   FlatList,
+  
 } from "react-native";
 import React from "react";
 
@@ -133,13 +134,14 @@ export class BottomPopUp extends React.Component {
           <View // este es el diseño del pop
             style={{
               backgroundColor: "#FFFFFF",
-              width: "100%",
+              width: "99%",
+              height:"99%",
              // height: "20%",
               borderTopRightRadius: 10,
               borderTopLeftRadius: 10,
               paddingHorizontal: 10,
             
-              maxHeight: deviceHeight * 0.4,
+              //maxHeight: deviceHeight * 0.4,
             }}
             
           >

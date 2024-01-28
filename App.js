@@ -6,6 +6,7 @@ import {
   TouchableWithoutFeedback,
   Text,
   View,
+  
 } from "react-native";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import { BottomPopUp } from "./src/BottomPopUp";
@@ -13,28 +14,51 @@ import { BottomPopUp } from "./src/BottomPopUp";
 const popUplist =[
     {
       id:1,
-      name: "Task"
+      name: "Big Mac"
     },
     {
       id:2,
-      name: "greenk"
+      name: "Triple hamburguesa con queso"
     },
     {
       id:3,
-      name: "Lee"
+      name: "Mc Nuggets"
     }
+]
+const popUplist2 =[
+  {
+    id:1,
+    name: "Whopper con queso"
+  },
+  {
+    id:2,
+    name: "Doble Texas"
+  },
+  {
+    id:3,
+    name: "Chiken TENDERCRISP"
+  }
 ]
 
 
 
 export default function App() {
-  let popupRef = React.createRef();
+ 
+  let popupRef1 = React.createRef();
+  let popupRef2 = React.createRef();
 
   const onShowPopup = () => {
-    popupRef.show();
+    popupRef1.current.show();
   };
   const onClosePopup = () => {
-    popupRef.close();
+    popupRef1.current.close();
+  };
+
+  const onShowPopup2 = () => {
+    popupRef2.current.show();
+  };
+  const onClosePopup2 = () => {
+    popupRef2.current.close();
   };
 
   return (
@@ -47,8 +71,8 @@ export default function App() {
             <FontAwesome5 name="bookmark" style={styles.Icono} />
           </TouchableWithoutFeedback>
           <BottomPopUp
-            title="Pop de Prueba "
-            ref={(target) => (popupRef = target)}
+            title="McMenu "
+            ref={popupRef1}
             onTouchOutside={onClosePopup}
             data={popUplist}
           />
@@ -60,21 +84,21 @@ export default function App() {
       <Text style={styles.txtCont}>Burger King</Text>
         <StatusBar barStyle="dark-content" />
         <SafeAreaView style={styles.container}>
-          <TouchableWithoutFeedback onPress={onShowPopup}>
+          <TouchableWithoutFeedback onPress={onShowPopup2}>
             <FontAwesome5 name="bookmark" style={styles.Icono} />
           </TouchableWithoutFeedback>
           <BottomPopUp
-            title="Pop de Prueba"
-            ref={(target) => (popupRef = target)}
-            onTouchOutside={onClosePopup}
-            data={popUplist}
+            title="Decreto del rey"
+            ref={popupRef2}
+            onTouchOutside={onClosePopup2}
+            data={popUplist2}
           />
         </SafeAreaView>
 
         
       </View>
+      
     </View>
-
     
     
   );

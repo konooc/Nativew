@@ -6,12 +6,21 @@ import {
   View,
   Text,
   FlatList,
+  
 } from "react-native";
 import React from "react";
+import CustomButton from "./Button" // Importar el componente CustomButton
+import { useNavigation } from '@react-navigation/native'; // Importa hook de navegación
+
 
 const deviceHeight = Dimensions.get("window").height;
 
-export class BottomPopUp extends React.Component {
+
+
+export class ModalPop extends React.Component {
+ 
+  
+
   constructor(props) {
     super(props);
     this.state = {
@@ -25,6 +34,11 @@ export class BottomPopUp extends React.Component {
   close = () => {
     this.setState({ show: false });
   };
+  handleSubmit = () => {
+    
+  };//le agregue esto para que no haga ninguna funcion despues se agrega que lleve a otra pantalla
+  
+  
   renderOutsideTouchable(onTouch) {
     const view = <View style={{ flex: 1, width: "100%",}} />;
 
@@ -75,9 +89,40 @@ export class BottomPopUp extends React.Component {
                           paddingBottom: 40
                       }} 
            />
+           
         </View>
     )
   }
+  contSave = () => {
+    return (
+      <View style={{marginTop: "70%",justifyContent:"center", alignItems: 'center',}}>
+        <Text style={{color: '#00f',fontSize: 50, fontWeight: 'bold',}}>
+            Haz guardado
+        </Text>
+      </View>
+      
+    );
+  } 
+  renderBtninfo = () => { 
+   
+    return (
+      
+      <View style={{marginTop: 40,
+        alignItems: 'center'}}>
+        <CustomButton txt="Ver Info" onClick={this.handleVerInfo} />
+      </View>
+    );
+  } 
+  renderBtnback = () => {
+    return (
+      <View style={{marginTop: 10,
+        alignItems: 'center',}}>
+        <CustomButton txt="Cerrar" onClick={this.close} />
+      </View>
+    
+    );
+  } 
+  
   
  
   renderItem = ({item}) => {
@@ -111,8 +156,11 @@ export class BottomPopUp extends React.Component {
   render() {
     let { show } = this.state;
     const { onTouchOutside, title } = this.props;
+    
 
     return (
+
+
       <Modal
         animationType="fade"
         transparent={true}
@@ -124,28 +172,34 @@ export class BottomPopUp extends React.Component {
           flex: 1,
           backgroundColor: "#000000AA",
           justifyContent: "flex-end",
-          //alignItems: "center", // Añadido para centrar horizontalmente
+          alignItems: "center", // Añadido para centrar horizontalmente
         }}
         >
-          {this.renderOutsideTouchable(onTouchOutside)}
+          {this.renderOutsideTouchable(onTouchOutside)} 
           
           
           <View // este es el diseño del pop
             style={{
-              backgroundColor: "#FFFFFF",
-              width: "100%",
+              
+              backgroundColor: "#6E7B8B",
+              width: "99%",
+              height:"99%",
              // height: "20%",
               borderTopRightRadius: 10,
               borderTopLeftRadius: 10,
               paddingHorizontal: 10,
             
-              maxHeight: deviceHeight * 0.4,
+              //maxHeight: deviceHeight * 0.4,
             }}
             
           >
             
+            
+            {/*this.renderContent()}*/}
+            {this.contSave()}
             {this.renderTitle()}
-            {this.renderContent()}
+            {this.renderBtninfo()}
+            {this.renderBtnback()}
 
            
           </View>

@@ -6,72 +6,173 @@ import {
   TouchableWithoutFeedback,
   Text,
   View,
+  Button,
+  
 } from "react-native";
+
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
-import { BottomPopUp } from "./src/BottomPopUp";
 
-const popUplist =[
-    {
-      id:1,
-      name: "Task"
-    },
-    {
-      id:2,
-      name: "greenk"
-    },
-    {
-      id:3,
-      name: "Lee"
-    }
-]
+import { ModalPop } from "./src/Componentes/ModalPop";
+import  CustomButton  from "./src/Componentes/Button";
+import Pantalla from './screens/panatalla 1';
 
-
+const Stack = createStackNavigator();
+const popUplist = [
+  {
+    id: 1,
+    name: "Big Mac",
+  },
+  {
+    id: 2,
+    name: "Triple hamburguesa con queso",
+  },
+  {
+    id: 3,
+    name: "Mc Nuggets",
+  },
+];
+const popUplist2 = [
+  {
+    id: 1,
+    name: "Whopper con queso",
+  },
+  {
+    id: 2,
+    name: "Doble Texas",
+  },
+  {
+    id: 3,
+    name: "Chiken TENDERCRISP",
+  },
+];
 
 export default function App() {
-  let popupRef = React.createRef();
-
-  const onShowPopup = () => {
-    popupRef.show();
+  // constante del boton Lógica de manejo de envío
+  const handleSubmit = () => {
+    
   };
-  const onClosePopup = () => {
-    popupRef.close();
-  };
+  
 
   return (
-    <>
-      <StatusBar barStyle="dark-content" />
-
-      <SafeAreaView style={styles.container}>
-        <TouchableWithoutFeedback onPress={onShowPopup}>
-          <FontAwesome5 name="bookmark" style={styles.Icono} />
-        </TouchableWithoutFeedback>
-        <BottomPopUp
-          title="Pop de Prueba "
-          ref={(target) => (popupRef = target)}
-          onTouchOutside={onClosePopup}
-          data={popUplist}
-        />
-      </SafeAreaView>
-    </>
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="Inicio" component={InicioScreen} />
+        <Stack.Screen name="Pantalla" component={Pantalla} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
 
+let popupRef1 = React.createRef();
+  let popupRef2 = React.createRef();
+
+  const onShowPopup = () => {
+    popupRef1.current.show();
+  };
+  const onClosePopup = () => {
+    popupRef1.current.close();
+  };
+
+  const onShowPopup2 = () => {
+    popupRef2.current.show();
+  };
+  const onClosePopup2 = () => {
+    popupRef2.current.close();
+  };
+
+function InicioScreen({ navigation }) {
+  return (
+    <View style={styles.container}>
+      <View style={styles.contTitle}>
+        <Text style={styles.title}>Cuppo</Text>
+      </View>
+      <View style={styles.contBody}>
+        <View style={styles.contElement}>
+          <Text style={styles.txtCont}>McDonald</Text>
+          <StatusBar barStyle="dark-content" />
+          <SafeAreaView style={styles.safe}>
+            <TouchableWithoutFeedback onPress={onShowPopup}>
+              <FontAwesome5 name="bookmark" style={styles.bookmarkIcon} />
+            </TouchableWithoutFeedback>
+            <ModalPop
+              title="McMenu "
+              ref={popupRef1}
+              onTouchOutside={onClosePopup}
+              data={popUplist}
+            />
+          </SafeAreaView>
+        </View>
+        <View style={styles.contElement}>
+          <Text style={styles.txtCont}>Burger King</Text>
+          <StatusBar barStyle="dark-content" />
+          <SafeAreaView style={styles.safe}>
+            <TouchableWithoutFeedback onPress={onShowPopup2}>
+              <FontAwesome5 name="bookmark" style={styles.bookmarkIcon} />
+            </TouchableWithoutFeedback>
+            <ModalPop
+              title="Decreto del rey"
+              ref={popupRef2}
+              onTouchOutside={onClosePopup2}
+              data={popUplist2}
+            />
+          </SafeAreaView>
+        </View>
+      </View>
+      <View style={styles.contbtn}>
+        <CustomButton txt="Ver guardados" onClick={() => navigation.navigate('Pantalla')} />
+      </View>
+    </View>
+  );
+}
+
+
 const styles = StyleSheet.create({
+  //contenedor principal
   container: {
     flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
+    marginTop: 40,
+    marginBottom: 40,
+    // backgroundColor: "#fff",
+    justifyContent: "space-around",
   },
-
-  Icono: {
+  //contenido "Header"
+  contTitle: {
+    alignItems: "center",
+  },
+  title: {
+    fontSize: 50,
+    fontWeight: "bold",
+  },
+  //contenido "Body"
+  contBody: {
+    padding: 24,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  contElement: {
+    padding: 10,
+    backgroundColor: "#eaeaea",
+    width: "100%",
+    height: "auto",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "between",
+    marginBottom: 20,
+  },
+  bookmarkIcon: {
+    fontSize: 40,
+    padding: 4,
+  },
+  txtCont: {
     fontSize: 30,
-    backgroundColor: "white",
+    padding: 4,
+  },
+  //contenido "Footer"
 
-    position: "relative",
-    fontSize: 30,
-    fontFamily: "FontAwesome5Free-Regular",
-    fontWeight: "normal",
-    fontStyle: "normal",
+  contbtn: {
+    alignItems: "center",
   },
 });

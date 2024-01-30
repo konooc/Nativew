@@ -1,7 +1,7 @@
 import React from 'react';
 import { Text, View, Button } from 'react-native';
 
-export default function Pantalla({ navigation }) {
+export default function CupSave({ navigation }) {
   const handleGoBack = () => {
     navigation.goBack();
   };

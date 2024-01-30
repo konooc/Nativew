@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from 'react';
 import {
   StyleSheet,
   SafeAreaView,
@@ -12,12 +12,18 @@ import {
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-
+//importacion del icono
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
-
+//importacion de componenetes
 import { ModalPop } from "./src/Componentes/ModalPop";
 import  CustomButton  from "./src/Componentes/Button";
-import Pantalla from './screens/panatalla 1';
+import ModalComponent from './src/Componentes/Modal';
+
+//importaciones de las panatallas
+import CupSave from './screens/cupSave';
+import CupInfo from './screens/cupInfo';
+
+
 
 const Stack = createStackNavigator();
 const popUplist = [
@@ -59,8 +65,9 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name="Inicio" component={InicioScreen} />
-        <Stack.Screen name="Pantalla" component={Pantalla} />
+        <Stack.Screen name="Cuppo" component={InicioScreen} />
+        <Stack.Screen name="Guardados" component={CupSave} />
+        <Stack.Screen name="Informacion" component={CupInfo} />
       </Stack.Navigator>
     </NavigationContainer>
   );
@@ -84,27 +91,40 @@ let popupRef1 = React.createRef();
   };
 
 function InicioScreen({ navigation }) {
+
+    const [showModal, setShowModal] = useState(false);
+
+    const toggleModal = () => {
+    setShowModal(!showModal); }
+
   return (
     <View style={styles.container}>
       <View style={styles.contTitle}>
         <Text style={styles.title}>Cuppo</Text>
       </View>
       <View style={styles.contBody}>
-        <View style={styles.contElement}>
+
+        {<View style={styles.contElement}>
+        
           <Text style={styles.txtCont}>McDonald</Text>
-          <StatusBar barStyle="dark-content" />
-          <SafeAreaView style={styles.safe}>
-            <TouchableWithoutFeedback onPress={onShowPopup}>
-              <FontAwesome5 name="bookmark" style={styles.bookmarkIcon} />
-            </TouchableWithoutFeedback>
-            <ModalPop
-              title="McMenu "
-              ref={popupRef1}
-              onTouchOutside={onClosePopup}
-              data={popUplist}
-            />
-          </SafeAreaView>
-        </View>
+            <TouchableWithoutFeedback onPress={toggleModal}> 
+            <FontAwesome5 name="bookmark" style={styles.bookmarkIcon} />
+            </TouchableWithoutFeedback> 
+            <ModalComponent visible={showModal} onClose={toggleModal} />
+
+          </View>}
+
+          <View style={styles.contElement}>
+        
+          <Text style={styles.txtCont}>Papa Jhon's</Text>
+            <TouchableWithoutFeedback onPress={toggleModal}> 
+            <FontAwesome5 name="bookmark" style={styles.bookmarkIcon} />
+            </TouchableWithoutFeedback> 
+            <ModalComponent visible={showModal} onClose={toggleModal} />
+
+          </View>
+
+        {
         <View style={styles.contElement}>
           <Text style={styles.txtCont}>Burger King</Text>
           <StatusBar barStyle="dark-content" />
@@ -119,10 +139,11 @@ function InicioScreen({ navigation }) {
               data={popUplist2}
             />
           </SafeAreaView>
-        </View>
+        </View> }
       </View>
+
       <View style={styles.contbtn}>
-        <CustomButton txt="Ver guardados" onClick={() => navigation.navigate('Pantalla')} />
+        <CustomButton txt="Ver guardados" onClick={() => navigation.navigate('Guardados')} />
       </View>
     </View>
   );

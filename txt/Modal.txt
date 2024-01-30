@@ -10,17 +10,14 @@ import {
 } from "react-native";
 import React from "react";
 import CustomButton from "./Button" // Importar el componente CustomButton
-import { useNavigation } from '@react-navigation/native'; // Importa hook de navegación
 
 
 const deviceHeight = Dimensions.get("window").height;
 
 
-
 export class ModalPop extends React.Component {
- 
   
-
+  
   constructor(props) {
     super(props);
     this.state = {
@@ -37,8 +34,6 @@ export class ModalPop extends React.Component {
   handleSubmit = () => {
     
   };//le agregue esto para que no haga ninguna funcion despues se agrega que lleve a otra pantalla
-  
-  
   renderOutsideTouchable(onTouch) {
     const view = <View style={{ flex: 1, width: "100%",}} />;
 
@@ -103,13 +98,12 @@ export class ModalPop extends React.Component {
       
     );
   } 
-  renderBtninfo = () => { 
-   
+  renderBtninfo = () => {
     return (
       
       <View style={{marginTop: 40,
         alignItems: 'center'}}>
-        <CustomButton txt="Ver Info" onClick={this.handleVerInfo} />
+        <CustomButton txt="Ver Info" onClick={this.handleSubmit} />
       </View>
     );
   } 
@@ -156,11 +150,8 @@ export class ModalPop extends React.Component {
   render() {
     let { show } = this.state;
     const { onTouchOutside, title } = this.props;
-    
 
     return (
-
-
       <Modal
         animationType="fade"
         transparent={true}

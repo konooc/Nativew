@@ -6,13 +6,20 @@ import {
   TouchableWithoutFeedback,
   Text,
   View,
+  Button,
   
 } from "react-native";
+
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 
 import { ModalPop } from "./src/Componentes/ModalPop";
-import  CustomButton  from "./src/Componentes/Button"
+import  CustomButton  from "./src/Componentes/Button";
+import Pantalla from './screens/panatalla 1';
 
+const Stack = createStackNavigator();
 const popUplist = [
   {
     id: 1,
@@ -47,7 +54,19 @@ export default function App() {
   const handleSubmit = () => {
     
   };
-  let popupRef1 = React.createRef();
+  
+
+  return (
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="Inicio" component={InicioScreen} />
+        <Stack.Screen name="Pantalla" component={Pantalla} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+}
+
+let popupRef1 = React.createRef();
   let popupRef2 = React.createRef();
 
   const onShowPopup = () => {
@@ -64,6 +83,7 @@ export default function App() {
     popupRef2.current.close();
   };
 
+function InicioScreen({ navigation }) {
   return (
     <View style={styles.container}>
       <View style={styles.contTitle}>
@@ -102,11 +122,12 @@ export default function App() {
         </View>
       </View>
       <View style={styles.contbtn}>
-        <CustomButton txt="ver guardados" onClick={handleSubmit} />
+        <CustomButton txt="Ver guardados" onClick={() => navigation.navigate('Pantalla')} />
       </View>
     </View>
   );
 }
+
 
 const styles = StyleSheet.create({
   //contenedor principal

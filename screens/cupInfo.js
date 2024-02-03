@@ -3,7 +3,7 @@ import { Text, View, StyleSheet } from 'react-native';
 import CustomButton from '../src/Componentes/Button';
 
 
-export default function CupSave({ navigation }) {
+export default function CupInfo({ navigation }) {
   const handleGoBack = () => {
     navigation.goBack();
   };

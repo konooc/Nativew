@@ -24,5 +24,6 @@ export default  [
       "titulo": "Pizza Hut",
       "descripcion": "Una cadena internacional de restaurantes de comida rápida que se especializa en pizzas, pasta y otros platos italianos."
     },
+   
     
   ]

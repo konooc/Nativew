@@ -1,23 +1,48 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import { Text, View, StyleSheet } from 'react-native';
 import CustomButton from '../src/Componentes/Button';
 
 
-export default function CupInfo({ navigation }) {
+export default function CupInfo({ navigation, route }) {
+  const [cuponData, setCuponData] = useState(
+    {title: "cargando..",
+    price: "cargando..",
+    description: "cargando..",
+  }
+  );
+
+  const data = route.params;
   const handleGoBack = () => {
     navigation.goBack();
   };
 
+  useEffect(() => {
+    fetchCuponData();
+  }, []);
+
+  const fetchCuponData = async () => {
+    try {
+      const response = await fetch("https://dummyjson.com/products/"+data.id);
+      const jsonData = await response.json();
+      setCuponData(jsonData);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+
   return (
     <View style={styles.container}>
       <View style={styles.contTitle}>
-        <Text style={styles.title}>Informacion</Text>
+        <Text style={styles.title}>{cuponData.title}</Text>
       </View>
       <View style={styles.contBody}>
         <View style={styles.contElement}>
-          <Text style={styles.txtCont}>McDonald</Text>
+          <Text style={styles.txtCont}>${cuponData.price}</Text>
           <View style={styles.desCont}>
-            <Text style={styles.desInfo}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sagittis nisl rhoncus mattis rhoncus urna neque viverra.</Text>
+            <Text style={styles.desInfo}>
+              {cuponData.description}
+              </Text>
           </View>
         </View>
         

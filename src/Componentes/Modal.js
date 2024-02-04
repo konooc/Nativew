@@ -5,13 +5,17 @@ import { useNavigation } from '@react-navigation/native';
 import CustomButton from "./Button";
 
 
-const ModalComponent = ({ visible, onClose }) => {
+const ModalComponent = ({ visible, onClose, id }) => {
 
   const navigation = useNavigation();
 
   const handleVerPantalla = () => {
     onClose(); // Cierra el modal antes de navegar a la pantalla
-    navigation.navigate('Informacion'); // Navega a la pantalla 'Pantalla'
+    navigation.navigate('Informacion', 
+    { 
+     id:  id
+    }) // Navega a la pantalla 'Pantalla'
+
   };
   return (
     <Modal
